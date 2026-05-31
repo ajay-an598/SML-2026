@@ -15,6 +15,8 @@ import lombok.extern.java.Log;
 import sml.instructions.AddInstruction;
 //import sml.instructions.SubInstruction
 import sml.instructions.SubInstruction;
+//import sml.instructions.MulInstruction
+import sml.instructions.MulInstruction;
 
 /**
  * This class is the main translation mechanism.
@@ -110,6 +112,13 @@ public final class Translator {
                 s1 = scanInt();
                 s2 = scanInt();
                 return new SubInstruction(label, r, s1, s2);
+            }
+
+            case "mul" -> {
+                r = scanInt();
+                s1 = scanInt();
+                s2 = scanInt();
+                return new MulInstruction(label, r, s1, s2);
             }
 
             default -> System.out.println("Unknown instruction: " + opCode);
