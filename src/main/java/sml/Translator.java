@@ -19,6 +19,8 @@ import sml.instructions.SubInstruction;
 import sml.instructions.MulInstruction;
 //import sml.instructions.DivInstruction
 import sml.instructions.DivInstruction;
+//import sml.instructions.OutInstruction
+import sml.instructions.OutInstruction;
 
 /**
  * This class is the main translation mechanism.
@@ -128,6 +130,11 @@ public final class Translator {
                 s1 = scanInt();
                 s2 = scanInt();
                 return new DivInstruction(label, r, s1, s2);
+            }
+
+            case "out" -> {
+                r = scanInt();
+                return new OutInstruction(label, r);
             }
 
             default -> System.out.println("Unknown instruction: " + opCode);
