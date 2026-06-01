@@ -23,6 +23,8 @@ import sml.instructions.DivInstruction;
 import sml.instructions.OutInstruction;
 //import sml.instructions.LinInstruction
 import sml.instructions.LinInstruction;
+//import sml.instructions.BnzInstruction
+import sml.instructions.BnzInstruction;
 
 /**
  * This class is the main translation mechanism.
@@ -97,6 +99,7 @@ public final class Translator {
         int s1; // Possible operands of the instruction
         int s2;
         int r;
+        String s;
 
         if (line.equals("")) {
             return null;
@@ -143,6 +146,12 @@ public final class Translator {
                 r = scanInt();
                 s1 = scanInt();
                 return new LinInstruction(label, r, s1);
+            }
+
+            case "bnz" -> {
+                r = scanInt();
+                s = scan();
+                return new BnzInstruction(label, r, s);
             }
 
             default -> System.out.println("Unknown instruction: " + opCode);

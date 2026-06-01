@@ -19,5 +19,13 @@ import static lombok.AccessLevel.PUBLIC;
 public class LabelBridge {
     // TODO
 
+  // to access lables
+  public static int indexOf(Machine machine,String label) {
+		return machine.labels().indexOf(label);
+	}
+
+  public static void addLabel(Machine machine,String label){
+    machine.labels().addLabel(label);
+  }
 
 }
