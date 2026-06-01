@@ -17,6 +17,9 @@ class OutInstructionTest {
         machine.registers().register(2, 6);
         machine.registers().register(3, 7);
 
+        machine.registers().register(4, 2147483647+1);
+        machine.registers().register(5, -2147483648-1);
+
         PrintStream originalOut=System.out;
 
         try{
@@ -39,6 +42,18 @@ class OutInstructionTest {
           instruction3.execute(machine);
 
           assertEquals("7\n",out.toString());
+          out.reset();
+
+          Instruction instruction4 = InstructionTestSupport.instruction("Out", 4);
+          instruction4.execute(machine);
+
+          assertEquals("-2147483648\n",out.toString());
+          out.reset();
+
+          Instruction instruction5 = InstructionTestSupport.instruction("Out", 5);
+          instruction5.execute(machine);
+
+          assertEquals("2147483647\n",out.toString());
           out.reset();
         }
         finally{
