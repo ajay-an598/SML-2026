@@ -106,6 +106,7 @@ public final class Translator {
         }
         var opCode = scan();
 
+        /*
         switch (opCode) {
             case "add" -> {
                 r = scanInt();
@@ -156,10 +157,12 @@ public final class Translator {
 
             default -> System.out.println("Unknown instruction: " + opCode);
         }
-        return null; // FIX THIS
+        */
+        //return null; // FIX THIS// commented for part to
 
         // In the second phase you will replace the switch with...
         // return returnInstruction(label, opCode);
+        return returnInstruction(label, opCode);// for part 2
     }
 
     /*
@@ -214,7 +217,9 @@ public final class Translator {
 
         // find the correct constructor
         Constructor cons = findConstructor(clazz);
-        var objArray = argsForConstructor(null, label);
+        //var objArray = argsForConstructor(null, label);
+        var objArray = argsForConstructor(cons, label);
+
 
         try {
             return (Instruction) cons.newInstance(objArray); // create an instance with the ctor args
@@ -227,12 +232,37 @@ public final class Translator {
     private Constructor findConstructor(Class cl) {
         Constructor cons = null;
         // TODO
-        return null;
+        //return null;
+        try{
+          Constructor[] Constructors=cl.getConstructors();
+          cons=Constructors[0];
+        }
+        catch(Exception e){
+          return null;
+        }
+        return  cons;
     }
 
     private Object[] argsForConstructor(Constructor cons, String label) {
-        Object[] argsArray = null;
+        //Object[] argsArray = null;
         // TODO
-        return null;
+        //return null;
+
+        Class[] parameterTypes=cons.getParameterTypes();
+        //create args array of same lenght
+        Object[] argsArray = new Object[parameterTypes.length];
+        // first arg is label as we used in testfile
+        
+        argsArray[0]=label;
+
+        for(int i=1;i<parameterTypes.length;i++){
+          if(parameterTypes[i]==int.class){
+            argsArray[i]=scanInt();
+          }
+          else{
+            argsArray[i]=scan();
+          }
+        }
+        return argsArray;
     }
 }
