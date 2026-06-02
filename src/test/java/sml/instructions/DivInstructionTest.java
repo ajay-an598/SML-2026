@@ -85,4 +85,16 @@ class DivInstructionTest {
 
         assertThrows(ArithmeticException.class,()->instruction.execute(machine));
     }
+
+    @Test
+    void divideByMinusOneStoresResult() {
+        Machine machine = InstructionTestSupport.machine();
+        machine.registers().register(2, Integer.MIN_VALUE);
+        machine.registers().register(3, -1);
+
+        Instruction instruction = InstructionTestSupport.instruction("Div", 1, 2, 3);
+        instruction.execute(machine);
+
+        assertEquals(Integer.MIN_VALUE, machine.registers().register(1));
+    }
 }

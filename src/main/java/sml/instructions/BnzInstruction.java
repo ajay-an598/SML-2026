@@ -24,7 +24,7 @@ public class BnzInstruction extends Instruction {
           if (targetPc!=-1){
             m.pc(targetPc);
           }
-          // what if -1
+          // what if -1(do nothing)
         }
     }
 

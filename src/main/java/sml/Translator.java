@@ -158,7 +158,7 @@ public final class Translator {
             default -> System.out.println("Unknown instruction: " + opCode);
         }
         */
-        //return null; // FIX THIS// commented for part to
+        //return null; // FIX THIS// commented for part 2
 
         // In the second phase you will replace the switch with...
         // return returnInstruction(label, opCode);
@@ -218,7 +218,7 @@ public final class Translator {
         // find the correct constructor
         Constructor cons = findConstructor(clazz);
         //var objArray = argsForConstructor(null, label);
-        var objArray = argsForConstructor(cons, label);
+        var objArray = argsForConstructor(cons, label);// for part 2
 
 
         try {
@@ -259,7 +259,7 @@ public final class Translator {
           if(parameterTypes[i]==int.class){
             argsArray[i]=scanInt();
           }
-          else{
+          else if(parameterTypes[i]==String.class){
             argsArray[i]=scan();
           }
         }

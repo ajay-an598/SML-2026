@@ -42,4 +42,20 @@ class BnzInstructionTest {
         
         assertEquals(7, machine.pc());
     }
+
+    @Test
+    void bnzWhenRegisterNoJump() {
+        Machine machine = InstructionTestSupport.machine();
+        LabelBridge.addLabel(machine,"L1");
+        LabelBridge.addLabel(machine,"L2");
+
+        machine.registers().register(1,0);
+
+        machine.pc(7);
+
+        BnzInstruction instruction = new BnzInstruction("L1", 1, "Ajay");
+        instruction.execute(machine);
+        
+        assertEquals(7, machine.pc());
+    }
 }
